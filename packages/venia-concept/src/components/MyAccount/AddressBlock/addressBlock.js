@@ -7,6 +7,11 @@ import defaultClasses from './addressBlock.css';
 class AddressBlock extends Component {
     static propTypes = {
         classes: PropTypes.shape({
+            fullName: PropTypes.string,
+            street: PropTypes.string,
+            otherAddressInformation: PropTypes.string,
+            country: PropTypes.string,
+            telephone: PropTypes.string,
             telephoneLink: PropTypes.string
         }),
         address: PropTypes.shape({}),
@@ -31,15 +36,15 @@ class AddressBlock extends Component {
                 title={title}
                 actions={[{ title: 'Edit Address' }]}
             >
-                <div>
+                <div className={classes.fullName}>
                     {firstname} {lastname}
                 </div>
-                <div>{street[0]}</div>
-                <div>
+                <div className={classes.street}>{street[0]}</div>
+                <div className={classes.otherAddressInformation}>
                     {city}, {region}, {postcode}
                 </div>
-                <div>{country}</div>
-                <div>
+                <div className={classes.country}>{country}</div>
+                <div className={classes.telephone}>
                     T:
                     <a
                         className={classes.telephoneLink}
