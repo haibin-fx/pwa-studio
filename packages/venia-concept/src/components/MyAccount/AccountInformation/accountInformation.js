@@ -1,10 +1,13 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import get from 'lodash/get';
-import classify from 'src/classify';
+import InformationBlock from '../InformationBlock';
 
 class AccountInformation extends Component {
     static propTypes = {
+        classes: PropTypes.shape({
+            title: PropTypes.string
+        }),
         user: PropTypes.shape({}).isRequired
     };
 
@@ -22,27 +25,25 @@ class AccountInformation extends Component {
         const { firstname, lastname, email } = user;
 
         return (
-            <section>
-                <h2>Account information</h2>
-                <div>
-                    <h3>Contact information</h3>
+            <Fragment>
+                <InformationBlock
+                    title="Contact Information"
+                    actions={[{ title: 'Edit' }, { title: 'Change Password' }]}
+                >
                     <div>
                         {firstname} {lastname}
                     </div>
                     <div>{email}</div>
-                    <div>
-                        <button>Edit</button>
-                        <button>Change Password</button>
-                    </div>
-                </div>
-                <div>
-                    <h3>Newsletters</h3>
+                </InformationBlock>
+                <InformationBlock
+                    title="Newsletters"
+                    actions={[{ title: 'Edit' }]}
+                >
                     <p>{subscriptionStatusText}</p>
-                    <button>Edit</button>
-                </div>
-            </section>
+                </InformationBlock>
+            </Fragment>
         );
     }
 }
 
-export default classify()(AccountInformation);
+export default AccountInformation;

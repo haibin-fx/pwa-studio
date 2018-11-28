@@ -1,15 +1,20 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classify from 'src/classify';
+import InformationBlock from '../InformationBlock';
+import defaultClasses from './addressBlock.css';
 
 class AddressBlock extends Component {
     static propTypes = {
+        classes: PropTypes.shape({
+            telephoneLink: PropTypes.string
+        }),
         address: PropTypes.shape({}),
         title: PropTypes.string
     };
 
     render() {
-        const { address, title } = this.props;
+        const { address, title, classes } = this.props;
         const {
             firstname,
             lastname,
@@ -22,8 +27,10 @@ class AddressBlock extends Component {
         } = address || {};
 
         return (
-            <div>
-                <h3>{title}</h3>
+            <InformationBlock
+                title={title}
+                actions={[{ title: 'Edit Address' }]}
+            >
                 <div>
                     {firstname} {lastname}
                 </div>
@@ -32,11 +39,18 @@ class AddressBlock extends Component {
                     {city}, {region}, {postcode}
                 </div>
                 <div>{country}</div>
-                <div>T: {telephone}</div>
-                <button>Edit Address</button>
-            </div>
+                <div>
+                    T:
+                    <a
+                        className={classes.telephoneLink}
+                        href={`tel:${telephone}`}
+                    >
+                        {telephone}
+                    </a>
+                </div>
+            </InformationBlock>
         );
     }
 }
 
-export default classify()(AddressBlock);
+export default classify(defaultClasses)(AddressBlock);

@@ -1,0 +1,5 @@
+.button {
+    color: rgb(var(--venia-text-spot));
+    font-size: 0.875rem;
+    text-align: center;
+}
